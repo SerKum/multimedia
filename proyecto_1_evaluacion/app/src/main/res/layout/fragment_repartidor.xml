@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".RepartidorFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txLayoutProducto"
+            android:layout_width="@dimen/text_layout2_width"
+            android:layout_height="@dimen/text_layout2_height"
+            android:layout_margin="@dimen/margin_welcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/stroke_selector"
+            >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txEditEmpleado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/codigo_empleado"
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/txLayoutProducto"
+            app:layout_constraintEnd_toEndOf="@id/txLayoutProducto"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/buscar"
+            android:backgroundTint="@color/cV_color"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcDeliveryList"
+            android:layout_width="@dimen/rcListItemW"
+            android:layout_height="@dimen/rcListItemH"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_search"
+            android:layout_margin="@dimen/default_margin"
+            tools:listitem="@layout/item_empleado"
+            tools:itemCount="1"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

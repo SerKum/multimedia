@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">proyecto_1_evaluacion</string>
+    <string name="password">Contraseña</string>
+    <string name="user">Usuario</string>
+    <string name="realizar_pedidos">Realizar pedido</string>
+    <string name="info_productos">Info. producto</string>
+    <string name="asignar_repartidor">Asignar repartidor</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="remember_me">Recuérdame</string>
+    <string name="codigo_ean">Código EAN</string>
+    <string name="buscar">Buscar</string>
+    <string name="uncompleted_orders">Pedidos por completar</string>
+    <string name="unrevised_orders">Pedidos por revisar</string>
+    <string name="codigo_empleado">Código empleado</string>
+    <string name="asign">Asignar</string>
+    <string name="cargar">Cargar</string>
+</resources>

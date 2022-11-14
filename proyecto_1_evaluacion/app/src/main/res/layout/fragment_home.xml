@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/tvSaludo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Hola, "
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:layout_margin="@dimen/margin_welcome"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPedidos"
+            android:layout_width="@dimen/btnOptionsW"
+            android:layout_height="@dimen/btnOptionsH"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/realizar_pedidos"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/btn_radius"
+            android:backgroundTint="@color/pedidos_color"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInfo"
+            android:layout_width="@dimen/btnOptionsW"
+            android:layout_height="@dimen/btnOptionsH"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btnRepartidor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/info_productos"
+            app:cornerRadius="@dimen/btn_radius"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRepartidor"
+            android:layout_width="@dimen/btnOptionsW"
+            android:layout_height="@dimen/btnOptionsH"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/asignar_repartidor"
+            app:cornerRadius="@dimen/btn_radius"
+            android:backgroundTint="#A1A1A0"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogOut"
+            android:layout_width="@dimen/btnOptionsW"
+            android:layout_height="@dimen/btnOptionsH"
+            app:layout_constraintTop_toBottomOf="@id/btnRepartidor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="#E4D10000"
+            android:textStyle="bold"
+            android:text="@string/cerrar_sesion"
+            app:cornerRadius="@dimen/btn_radius"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvPortada"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cvPortada"
+        android:backgroundTint="@color/cvPortadaColor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="0dp"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/ivLogo"
+            android:layout_height="wrap_content"
+            android:src="@drawable/abuzon"
+            android:layout_gravity="start"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/cvPortada"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:background="@drawable/background"
+        >
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/cvW"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            app:cardCornerRadius="@dimen/cVRadius"
+            app:strokeWidth="@dimen/cvStroke"
+            app:strokeColor="@color/cV_color"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/logInLay"
+                    android:layout_width="@dimen/text_layout_width"
+                    android:layout_height="@dimen/text_layout_height"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="@color/stroke_selector"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/logInUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/user"
+                        android:drawableEnd="@drawable/ic_user"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/logInLay2"
+                    android:layout_width="@dimen/text_layout_width"
+                    android:layout_height="@dimen/text_layout_height"
+                    android:layout_margin="@dimen/default_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/logInLay"
+                    app:passwordToggleEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="@color/stroke_selector"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/logInPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/cbxRememberMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cbH"
+                    android:text="@string/remember_me"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/cb_marginEnd"
+                    android:layout_gravity="right"
+                    />
+
+                <Button
+                    android:id="@+id/btnLog"
+                    android:layout_width="@dimen/btnLogW"
+                    android:layout_height="@dimen/btnLogH"
+                    android:text="Iniciar sesión"
+                    android:textSize="12dp"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_gravity="end"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
