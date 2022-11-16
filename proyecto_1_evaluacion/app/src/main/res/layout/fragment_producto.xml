@@ -45,6 +45,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcProductSearch"
             android:layout_width="@dimen/rcListItemW"
             android:layout_height="@dimen/rcListItemH"
             android:visibility="gone"

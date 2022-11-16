@@ -8,10 +8,12 @@ import androidx.room.PrimaryKey
 data class ProductEntity
     (
         @PrimaryKey(autoGenerate = true)
-        val id: Long,
+        val id: Long = 0,
+        val ean : Long,
         val nombre : String,
         val descripcion : String
     )
+
 
 
 

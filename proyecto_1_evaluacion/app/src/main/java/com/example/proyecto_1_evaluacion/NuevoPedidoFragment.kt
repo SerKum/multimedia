@@ -6,28 +6,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_1_evaluacion.databinding.FragmentHomeBinding
+import com.example.proyecto_1_evaluacion.databinding.FragmentNuevoPedidoBinding
 import com.example.proyecto_1_evaluacion.databinding.FragmentPedidoBinding
+import com.example.proyecto_1_evaluacion.databinding.FragmentProductoBinding
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class PedidoFragment : Fragment() ,OnClickListener{
+class NuevoPedidoFragment : Fragment() , OnClickListener{
 
-    private lateinit var binding : FragmentPedidoBinding
+    private lateinit var binding : FragmentNuevoPedidoBinding
     private var listener : OnFragmentActionListener? = null
 
-    private lateinit var pedidoAdapter: PedidoAdapter
-    private lateinit var pedidoAdapter2: PedidoAdapter
+    private lateinit var productoAdapter: ProductoAdapter
 
     private lateinit var mLinearLayoutManager: RecyclerView.LayoutManager
+
+    private var productos : MutableList<ProductEntity> = TODO()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPedidoBinding.inflate(inflater)
+        binding = FragmentNuevoPedidoBinding.inflate(inflater)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -35,54 +40,39 @@ class PedidoFragment : Fragment() ,OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pedidoAdapter.clearPedidos()
-        pedidoAdapter2.clearPedidos()
+        productos.clear()
 
         setupRecyclerView(view)
 
         binding.btnNewOrder.setOnClickListener {
-            listener?.replaceFragment(NuevoPedidoFragment())
+            val pedido : OrderEntity = OrderEntity(productos = productos)
+            Thread{
+                AbuzonApplication.database.pedidoDao().addOrder(pedido)
+            }
+            listener?.replaceFragment(PedidoFragment())
         }
+
     }
 
     private fun setupRecyclerView(view: View) {
-        pedidoAdapter = PedidoAdapter(mutableListOf(), this)
-        pedidoAdapter2 = PedidoAdapter(mutableListOf(), this)
+        productoAdapter = ProductoAdapter(mutableListOf(), this)
         mLinearLayoutManager = LinearLayoutManager(view.context)
-        getPedidosIncompletos()
-        binding.rcUncompletedOrders.apply {
+        getAllProductos()
+        binding.rcAsignarProductos.apply {
             setHasFixedSize(true)
             layoutManager = mLinearLayoutManager
-            adapter = pedidoAdapter
-        }
-        getPedidosSinRevisar()
-        binding.rcUnrevisedOrders.apply {
-            setHasFixedSize(true)
-            layoutManager = mLinearLayoutManager
-            adapter = pedidoAdapter2
+            adapter = productoAdapter
         }
     }
 
-    private fun getPedidosIncompletos(){
+    private fun getAllProductos(){
         doAsync {
-            val pedidos : MutableList<OrderEntity> = AbuzonApplication.database.pedidoDao().getOrdersUncompleted(false)
+            val productos : MutableList<ProductEntity> = AbuzonApplication.database.productDao().getAllProduct()
             uiThread {
-                pedidoAdapter.setPedidos(pedidos)
+                productoAdapter.setProductos(productos)
             }
         }
     }
-
-
-    private fun getPedidosSinRevisar(){
-        doAsync {
-            val pedidos : MutableList<OrderEntity> = AbuzonApplication.database.pedidoDao().getOrdersUnrevised(true)
-            uiThread {
-                pedidoAdapter2.setPedidos(pedidos)
-            }
-        }
-    }
-
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -98,29 +88,18 @@ class PedidoFragment : Fragment() ,OnClickListener{
 
 
     companion object {
-        fun newInstance() : PedidoFragment{
-            return PedidoFragment()
+        fun newInstance() : NuevoPedidoFragment{
+            return NuevoPedidoFragment()
         }
     }
 
     override fun setProductosPedido(productEntity: ProductEntity) {
-        TODO("Not yet implemented")
+        productos.add(productEntity)
+        Toast.makeText(binding.root.context," Producto añadido ",Toast.LENGTH_LONG)
     }
 
     override fun setConfiguration(userEntity: UserEntity) {
-
-        if (userEntity.isManager){
-            binding.tvUnrevised.visibility = View.VISIBLE
-            binding.viewDivider2.visibility = View.VISIBLE
-            binding.rcUnrevisedOrders.visibility = View.VISIBLE
-            binding.btnNewOrder.visibility = View.VISIBLE
-        }
-        else{
-            binding.tvUnrevised.visibility = View.GONE
-            binding.viewDivider2.visibility = View.GONE
-            binding.btnNewOrder.visibility = View.GONE
-            binding.rcUnrevisedOrders.visibility = View.GONE
-        }
+        TODO("Not yet implemented")
     }
 
     override fun onClick(userEntity: UserEntity) {

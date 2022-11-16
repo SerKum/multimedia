@@ -16,4 +16,8 @@
     <string name="codigo_empleado">Código empleado</string>
     <string name="asign">Asignar</string>
     <string name="cargar">Cargar</string>
+    <string name="tramitar">Tramitar</string>
+    <string name="crear">Crear</string>
+    <string name="agregar">Agregar</string>
+    <string name="new_order">Nuevo pedido</string>
 </resources>

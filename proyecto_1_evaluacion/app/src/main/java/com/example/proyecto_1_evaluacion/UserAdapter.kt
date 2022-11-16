@@ -42,6 +42,10 @@ class UserAdapter
         notifyDataSetChanged()
     }
 
+    fun clearUsers(){
+        usuarios.clear()
+    }
+
     fun update(userEntity: UserEntity) {
         val index = usuarios.indexOf(userEntity)
         if (index != -1){
@@ -79,6 +83,7 @@ class UserAdapter
             userAdapter.usuarios.add(userEntity)
             userAdapter.notifyDataSetChanged()
         }
+
     }
 
 }

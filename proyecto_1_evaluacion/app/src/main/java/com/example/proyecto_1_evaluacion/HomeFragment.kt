@@ -1,14 +1,16 @@
 package com.example.proyecto_1_evaluacion
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.example.proyecto_1_evaluacion.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment() , OnClickListener{
 
     private lateinit var binding : FragmentHomeBinding
     private var listener : OnFragmentActionListener? = null
@@ -59,5 +61,38 @@ class HomeFragment : Fragment() {
         fun newInstance() : HomeFragment{
             return HomeFragment()
         }
+    }
+
+    override fun setProductosPedido(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setConfiguration(userEntity: UserEntity) {
+        if (userEntity.isManager){
+            binding.btnRepartidor.visibility = View.VISIBLE
+        }
+        else {
+            binding.btnRepartidor.visibility = View.GONE
+        }
+    }
+
+    override fun onClick(userEntity: UserEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(orderEntity: OrderEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteOrder(orderEntity: OrderEntity, userEntity: UserEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getActualUser(): UserEntity {
+        TODO("Not yet implemented")
     }
 }

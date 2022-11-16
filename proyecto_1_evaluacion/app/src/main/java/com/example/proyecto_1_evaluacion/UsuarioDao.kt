@@ -9,6 +9,12 @@ interface UsuarioDao {
     @Query("SELECT * FROM UserEntity")
     fun getAllUsuarios():MutableList<UserEntity>
 
+    @Query("SELECT * FROM UserEntity WHERE codigo = :codigo")
+    fun getOneDelivery(codigo : Int):UserEntity
+
+    @Query("SELECT EXISTS (SELECT 1 FROM UserEntity WHERE codigo = :codigo)")
+    fun existsUser(codigo : Int):Boolean
+
     @Query("SELECT EXISTS (SELECT 1 FROM UserEntity WHERE nombre = :nombre)")
     fun exists(nombre: String):Boolean
 

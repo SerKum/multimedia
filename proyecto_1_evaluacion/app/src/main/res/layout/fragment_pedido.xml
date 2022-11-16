@@ -11,17 +11,31 @@
         android:layout_height="match_parent"
         >
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnNewOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="@color/cV_color"
+            android:layout_marginTop="@dimen/common_margin_min"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvUncompleted"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <TextView
             android:id="@+id/tvUncompleted"
             android:layout_width="@dimen/rcListItemW"
             android:layout_height="wrap_content"
             android:text="@string/uncompleted_orders"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_marginTop="@dimen/cb_marginEnd"
+            android:layout_marginTop="@dimen/common_margin_min"
             android:textStyle="bold"
             android:gravity="center"
             android:background="@color/logout_color"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnNewOrder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
@@ -53,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text="@string/unrevised_orders"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_marginTop="@dimen/cb_marginEnd"
+            android:layout_marginTop="@dimen/common_margin_min"
             android:textStyle="bold"
             android:gravity="center"
             android:background="@color/cvPortadaColor"

@@ -34,7 +34,7 @@ class PedidoAdapter
 
         with(holder) {
             setListener(pedido)
-            binding.tvNombre.text = pedido.codigo
+            binding.tvNombre.text = pedido.id.toString()
         }
     }
 
@@ -43,6 +43,10 @@ class PedidoAdapter
     fun setPedidos(pedidos: MutableList<OrderEntity>){
         this.pedidos = pedidos
         notifyDataSetChanged()
+    }
+
+    fun clearPedidos(){
+        pedidos.clear()
     }
 
     fun update(orderEntity: OrderEntity) {
@@ -71,8 +75,13 @@ class PedidoAdapter
                 listener.onClick(orderEntity)
             }
             binding.pedido.setOnClickListener{
-                listener2?.replaceFragment(PedidoActualFragment(orderEntity))
-                orderEntity.isCompleted = true
+                if (orderEntity.isCompleted.equals(false)){
+                    listener2?.replaceFragment(PedidoActualFragment(orderEntity))
+                    orderEntity.isCompleted = true
+                }
+                else if (orderEntity.isCompleted.equals(true) && user.isManager.equals(true)){
+                    listener2?.replaceFragment(PedidoActualFragment(orderEntity))
+                }
             }
 
             binding.root.setOnLongClickListener {

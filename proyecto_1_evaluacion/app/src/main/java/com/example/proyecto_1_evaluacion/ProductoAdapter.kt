@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ class ProductoAdapter
     (private var productos: MutableList<ProductEntity>,private var listener: OnClickListener): RecyclerView.Adapter<ProductoAdapter.ViewHolder>()
 
 {
+    val user : UserEntity = listener.getActualUser()
 
     private lateinit var context: Context
 
@@ -25,8 +27,16 @@ class ProductoAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
 
+
+
         val view = LayoutInflater.from(context).inflate(R.layout.item_producto,parent,false)
 
+        if (parent.equals(NuevoPedidoFragment)){
+            view.findViewById<Button>(R.id.btnAgregarProducto).visibility = View.VISIBLE
+        }
+        else{
+            view.findViewById<Button>(R.id.btnAgregarProducto).visibility = View.GONE
+        }
         return ViewHolder(view)
     }
 
@@ -36,8 +46,9 @@ class ProductoAdapter
         with(holder) {
             setListener(producto)
             binding.tvNombre.text = producto.nombre
-            binding.tvDescripcion.text = producto.descripcion
+            binding.tvDescripcion.text =  producto.ean.toString()+" "+producto.descripcion
         }
+
     }
 
     override fun getItemCount(): Int = productos.size
@@ -45,6 +56,10 @@ class ProductoAdapter
     fun setProductos(productos: MutableList<ProductEntity>){
         this.productos = productos
         notifyDataSetChanged()
+    }
+
+    fun clearProductos(){
+        productos.clear()
     }
 
     fun update(productEntity: ProductEntity) {
@@ -66,12 +81,15 @@ class ProductoAdapter
     inner class ViewHolder(view : View): RecyclerView.ViewHolder(view){
         val binding = ItemProductoBinding.bind(view)
 
-        val user : UserEntity = listener.getActualUser()
 
         fun setListener(productEntity: ProductEntity) {
             binding.root.setOnClickListener{
                 listener.onClick(productEntity)
             }
+            binding.btnAgregarProducto.setOnClickListener{
+                listener.setProductosPedido(productEntity)
+            }
+
         }
 
     }
