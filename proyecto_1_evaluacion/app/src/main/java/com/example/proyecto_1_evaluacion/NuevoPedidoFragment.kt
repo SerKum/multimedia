@@ -25,7 +25,7 @@ class NuevoPedidoFragment : Fragment() , OnClickListener{
 
     private lateinit var mLinearLayoutManager: RecyclerView.LayoutManager
 
-    private var productos : MutableList<ProductEntity> = TODO()
+    private lateinit var productos : MutableList<ProductEntity>
 
 
     override fun onCreateView(
@@ -40,15 +40,20 @@ class NuevoPedidoFragment : Fragment() , OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productos.clear()
 
         setupRecyclerView(view)
 
         binding.btnNewOrder.setOnClickListener {
-            val pedido : OrderEntity = OrderEntity(productos = productos)
+            val pedido : OrderEntity = OrderEntity()
+            for (p in productos){
+                val productOrderProductEntity : OrderProductEntity = OrderProductEntity(orderId = pedido.id, productId = p.id)
+                Thread{
+                    AbuzonApplication.database.orderproductDao().addProductOrder(productOrderProductEntity)
+                }.start()
+            }
             Thread{
                 AbuzonApplication.database.pedidoDao().addOrder(pedido)
-            }
+            }.start()
             listener?.replaceFragment(PedidoFragment())
         }
 
@@ -98,10 +103,6 @@ class NuevoPedidoFragment : Fragment() , OnClickListener{
         Toast.makeText(binding.root.context," Producto añadido ",Toast.LENGTH_LONG)
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
-        TODO("Not yet implemented")
-    }
-
     override fun onClick(userEntity: UserEntity) {
         TODO("Not yet implemented")
     }
@@ -118,7 +119,4 @@ class NuevoPedidoFragment : Fragment() , OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }

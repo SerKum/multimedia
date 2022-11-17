@@ -23,7 +23,10 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
     private var listener : OnFragmentActionListener? = null
 
     private var order : OrderEntity = orderEntity
+    private var orderProduct : MutableList<ProductEntity> = getProductOrder()
 
+
+    private lateinit var user : UserEntity
     private lateinit var productoAdapter: ProductoAdapter
 
     private lateinit var mLinearLayoutManager: RecyclerView.LayoutManager
@@ -51,19 +54,27 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
             Snackbar.make(it," Pedido tramitado con exito ",Snackbar.LENGTH_LONG)
             Thread{
                 AbuzonApplication.database.pedidoDao().deleteOrder(order)
-            }
+            }.start()
             listener?.replaceFragment(PedidoFragment())
         }
 
         binding.btnCargar.setOnClickListener {
-            if (comprobarProducto(order.productos,codEan)){
-                borrarProductoLista(order.productos,codEan)
+            if (comprobarProducto(orderProduct,codEan)){
+                borrarProductoLista(orderProduct,codEan)
                 setupRecyclerView(it)
             }
             else {
                 Toast.makeText(binding.root.context,"Introduce el producto correcto, por favor",Toast.LENGTH_LONG)
             }
         }
+    }
+
+    private fun getProductOrder() : MutableList<ProductEntity>{
+        var ordPr : MutableList<ProductEntity> = mutableListOf()
+        Thread{
+             ordPr = AbuzonApplication.database.orderproductDao().getAllProductOrder(order.id)
+        }.start()
+        return ordPr
     }
 
     private fun comprobarProducto(list : MutableList<ProductEntity>, ean : String) : Boolean{
@@ -79,7 +90,11 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
     private fun borrarProductoLista(list : MutableList<ProductEntity>, ean : String){
         for (producto in list) {
             if (producto.ean.toString().equals(ean)) {
-                order.productos.remove(producto)
+                orderProduct.remove(producto)
+                val productOrderProductEntity : OrderProductEntity = OrderProductEntity(orderId = order.id, productId = producto.id)
+                Thread{
+                    AbuzonApplication.database.orderproductDao().deleteProductOrder(productOrderProductEntity)
+                }.start()
             }
         }
     }
@@ -88,7 +103,7 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
         productoAdapter = ProductoAdapter(mutableListOf(), this)
         mLinearLayoutManager = LinearLayoutManager(view.context)
         getProductosPedido()
-        binding.tvRemaining.setText("Faltan : "+order.productos.size)
+        binding.tvRemaining.setText("Faltan : "+orderProduct.size)
         binding.rcProductList.apply {
             setHasFixedSize(true)
             layoutManager = mLinearLayoutManager
@@ -98,7 +113,7 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
 
     private fun getProductosPedido(){
         doAsync {
-            val productos : MutableList<ProductEntity> = order.productos
+            val productos : MutableList<ProductEntity> = orderProduct
             uiThread {
                 productoAdapter.setProductos(productos)
             }
@@ -129,8 +144,7 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
         TODO("Not yet implemented")
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
-
+    private fun setConfiguration(userEntity: UserEntity) {
         if (userEntity.isManager){
             binding.btnTramitar.visibility = View.VISIBLE
         }
@@ -155,7 +169,4 @@ class PedidoActualFragment(orderEntity: OrderEntity) : Fragment(),OnClickListene
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }

@@ -14,6 +14,9 @@ class HomeActivity : AppCompatActivity(),OnFragmentActionListener {
     private lateinit var binding : ActivityHomeBinding
 
     private var listener: OnFragmentActionListener? = null
+    private var listener2: OnClickListener? = null
+
+    private lateinit var user : UserEntity
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +25,8 @@ class HomeActivity : AppCompatActivity(),OnFragmentActionListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        user = intent.extras?.get("usuario") as UserEntity
 
         loadFragment(HomeFragment())
 
@@ -59,9 +64,11 @@ class HomeActivity : AppCompatActivity(),OnFragmentActionListener {
 
     }
 
-    override fun onClickFragmentButton() {
-        TODO("Not yet implemented")
+    override fun onClickFragmentButton(): UserEntity {
+        return user
     }
+
+
 
 
 }

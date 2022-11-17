@@ -6,10 +6,9 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 
 
-@Entity(tableName = "OrderEntity")
-data class OrderEntity
+@Entity(primaryKeys = ["orderId","productId"], tableName = "OrderProductEntity")
+data class OrderProductEntity
     (
-    @PrimaryKey(autoGenerate = true)
-        val id: Long = 0,
-        var isCompleted : Boolean = false
+        val orderId : Long,
+        val productId : Long
     )

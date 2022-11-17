@@ -11,7 +11,8 @@ data class ProductEntity
         val id: Long = 0,
         val ean : Long,
         val nombre : String,
-        val descripcion : String
+        val descripcion : String,
+        val imageUrl : String
     )
 
 

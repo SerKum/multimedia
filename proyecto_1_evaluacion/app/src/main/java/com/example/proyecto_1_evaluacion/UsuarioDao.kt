@@ -15,8 +15,8 @@ interface UsuarioDao {
     @Query("SELECT EXISTS (SELECT 1 FROM UserEntity WHERE codigo = :codigo)")
     fun existsUser(codigo : Int):Boolean
 
-    @Query("SELECT EXISTS (SELECT 1 FROM UserEntity WHERE nombre = :nombre)")
-    fun exists(nombre: String):Boolean
+    @Query("SELECT EXISTS (SELECT 1 FROM UserEntity WHERE codigo = :codigo)")
+    fun exists(codigo: Int):Boolean
 
     @Query("SELECT * FROM UserEntity WHERE codigo = :codigo")
     fun getAUser(codigo : Int):UserEntity

@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.example.proyecto_1_evaluacion.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() , OnClickListener{
+class HomeFragment : Fragment() ,OnClickListener{
 
     private lateinit var binding : FragmentHomeBinding
     private var listener : OnFragmentActionListener? = null
+    private var listener2 : OnClickListener? = null
 
+    private lateinit var user :UserEntity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +29,11 @@ class HomeFragment : Fragment() , OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        user = listener!!.onClickFragmentButton()
+
+        setConfiguration(user)
+
+        binding.tvSaludo.setText("Hola, "+user.nombre)
         binding.btnPedidos.setOnClickListener{
             listener?.replaceFragment(PedidoFragment())
         }
@@ -67,7 +74,8 @@ class HomeFragment : Fragment() , OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
+
+    private fun setConfiguration(userEntity: UserEntity) {
         if (userEntity.isManager){
             binding.btnRepartidor.visibility = View.VISIBLE
         }
@@ -92,7 +100,4 @@ class HomeFragment : Fragment() , OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }

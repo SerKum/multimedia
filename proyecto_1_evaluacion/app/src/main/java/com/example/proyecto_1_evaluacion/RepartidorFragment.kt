@@ -118,10 +118,6 @@ class RepartidorFragment : Fragment() , OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
-        TODO("Not yet implemented")
-    }
-
     override fun onClick(userEntity: UserEntity) {
         TODO("Not yet implemented")
     }
@@ -138,7 +134,4 @@ class RepartidorFragment : Fragment() , OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }

@@ -5,6 +5,6 @@ import androidx.fragment.app.Fragment
 interface OnFragmentActionListener {
     fun replaceFragment(fragment: Fragment)
     fun loadFragment(fragment: Fragment)
-    fun onClickFragmentButton()
+    fun onClickFragmentButton(): UserEntity
     fun logOut()
 }

@@ -9,9 +9,11 @@ import com.example.proyecto_1_evaluacion.databinding.ItemEmpleadoBinding
 import com.example.proyecto_1_evaluacion.databinding.ItemProductoBinding
 
 class UserAdapter
-    (private var usuarios: MutableList<UserEntity>, private var listener: OnClickListener): RecyclerView.Adapter<UserAdapter.ViewHolder>()
+    (private var usuarios: MutableList<UserEntity>, private var listener: OnClickListener): RecyclerView.Adapter<UserAdapter.ViewHolder>(),OnClickListener
 
 {
+
+    private lateinit var user : UserEntity
 
     private lateinit var context: Context
 
@@ -65,8 +67,6 @@ class UserAdapter
     inner class ViewHolder(view : View): RecyclerView.ViewHolder(view){
         val binding = ItemEmpleadoBinding.bind(view)
 
-        val user : UserEntity = listener.getActualUser()
-
         fun setListener(userEntity: UserEntity) {
             binding.root.setOnClickListener{
                 listener.onClick(userEntity)
@@ -84,6 +84,26 @@ class UserAdapter
             userAdapter.notifyDataSetChanged()
         }
 
+    }
+
+    override fun setProductosPedido(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(userEntity: UserEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(orderEntity: OrderEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteOrder(orderEntity: OrderEntity, userEntity: UserEntity) {
+        TODO("Not yet implemented")
     }
 
 }

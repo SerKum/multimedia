@@ -37,7 +37,6 @@ class ProductoFragment : Fragment() ,OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productoAdapter.clearProductos()
 
         binding.btnSearch.setOnClickListener{
             val ean : Long = binding.txEditProducto.text.toString().toLong()
@@ -105,10 +104,6 @@ class ProductoFragment : Fragment() ,OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
-        TODO("Not yet implemented")
-    }
-
     override fun onClick(userEntity: UserEntity) {
         TODO("Not yet implemented")
     }
@@ -125,7 +120,4 @@ class ProductoFragment : Fragment() ,OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }

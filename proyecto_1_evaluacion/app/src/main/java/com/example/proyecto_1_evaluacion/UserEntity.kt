@@ -2,6 +2,7 @@ package com.example.proyecto_1_evaluacion
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 
 @Entity(tableName = "UserEntity")
@@ -15,7 +16,7 @@ data class UserEntity
     val password : String,
     var isManager : Boolean = false,
     var isDelivery : Boolean = false
-    )
+    ) : Serializable
 {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

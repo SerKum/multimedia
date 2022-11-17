@@ -13,10 +13,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.proyecto_1_evaluacion.databinding.ItemPedidoBinding
 
 class PedidoAdapter
-    (private var pedidos: MutableList<OrderEntity>,private var listener: OnClickListener): RecyclerView.Adapter<PedidoAdapter.ViewHolder>()
+    (private var pedidos: MutableList<OrderEntity>,private var listener: OnClickListener): RecyclerView.Adapter<PedidoAdapter.ViewHolder>(),OnClickListener
 
 {
 
+
+    private lateinit var user : UserEntity
     private lateinit var context: Context
 
     private var listener2 : OnFragmentActionListener? = null
@@ -68,9 +70,8 @@ class PedidoAdapter
     inner class ViewHolder(view : View): RecyclerView.ViewHolder(view){
         val binding = ItemPedidoBinding.bind(view)
 
-        val user : UserEntity = listener.getActualUser()
-
         fun setListener(orderEntity: OrderEntity) {
+            user = listener2!!.onClickFragmentButton()
             binding.root.setOnClickListener{
                 listener.onClick(orderEntity)
             }
@@ -101,6 +102,27 @@ class PedidoAdapter
             pedidoAdapter.pedidos.add(orderEntity)
             pedidoAdapter.notifyDataSetChanged()
         }
+    }
+
+    override fun setProductosPedido(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun onClick(userEntity: UserEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(productEntity: ProductEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(orderEntity: OrderEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteOrder(orderEntity: OrderEntity, userEntity: UserEntity) {
+        TODO("Not yet implemented")
     }
 
 }

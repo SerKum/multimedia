@@ -14,7 +14,9 @@ class AbuzonApplication : Application() {
             this,
             AbuzonDatabase::class.java,
             "AbuzonDatabase")
+            .allowMainThreadQueries()
             .build()
 
     }
+
 }

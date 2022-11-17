@@ -21,7 +21,10 @@ class PedidoFragment : Fragment() ,OnClickListener{
     private lateinit var pedidoAdapter: PedidoAdapter
     private lateinit var pedidoAdapter2: PedidoAdapter
 
+    private lateinit var user : UserEntity
+
     private lateinit var mLinearLayoutManager: RecyclerView.LayoutManager
+    private lateinit var mLinearLayoutManager2: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +38,9 @@ class PedidoFragment : Fragment() ,OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pedidoAdapter.clearPedidos()
-        pedidoAdapter2.clearPedidos()
-
         setupRecyclerView(view)
+        user = listener!!.onClickFragmentButton()
+        setConfiguration(user)
 
         binding.btnNewOrder.setOnClickListener {
             listener?.replaceFragment(NuevoPedidoFragment())
@@ -49,6 +51,7 @@ class PedidoFragment : Fragment() ,OnClickListener{
         pedidoAdapter = PedidoAdapter(mutableListOf(), this)
         pedidoAdapter2 = PedidoAdapter(mutableListOf(), this)
         mLinearLayoutManager = LinearLayoutManager(view.context)
+        mLinearLayoutManager2 = LinearLayoutManager(view.context)
         getPedidosIncompletos()
         binding.rcUncompletedOrders.apply {
             setHasFixedSize(true)
@@ -58,7 +61,7 @@ class PedidoFragment : Fragment() ,OnClickListener{
         getPedidosSinRevisar()
         binding.rcUnrevisedOrders.apply {
             setHasFixedSize(true)
-            layoutManager = mLinearLayoutManager
+            layoutManager = mLinearLayoutManager2
             adapter = pedidoAdapter2
         }
     }
@@ -107,8 +110,7 @@ class PedidoFragment : Fragment() ,OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun setConfiguration(userEntity: UserEntity) {
-
+    private fun setConfiguration(userEntity: UserEntity) {
         if (userEntity.isManager){
             binding.tvUnrevised.visibility = View.VISIBLE
             binding.viewDivider2.visibility = View.VISIBLE
@@ -139,7 +141,4 @@ class PedidoFragment : Fragment() ,OnClickListener{
         TODO("Not yet implemented")
     }
 
-    override fun getActualUser(): UserEntity {
-        TODO("Not yet implemented")
-    }
 }
